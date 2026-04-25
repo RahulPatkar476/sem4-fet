@@ -15,7 +15,9 @@
         function changeRole() {
             const roleElement = document.getElementById("role-display");
             const oldRole = roleElement.innerText;
-            const newRole = prompt("Enter a new role:");
+            
+            // Adding oldRole as the second argument makes it appear inside the box
+            const newRole = prompt("Enter a new role:", oldRole);
 
             if (newRole === null || newRole.trim() === "" || newRole === oldRole) {
                 alert("No changes were made. You are still a " + oldRole);
