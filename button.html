@@ -7,7 +7,7 @@
 
     <h1>Rahul Patkar</h1>
     <h3 id="role-display">Developer</h3>
-    <p>I build web applications and love exploring new tech.</p>
+    <p>I am an BSDK!!!!.</p>
 
     <button onclick="changeRole()">Change Role</button>
 
@@ -16,11 +16,10 @@
             const roleElement = document.getElementById("role-display");
             const oldRole = roleElement.innerText;
             
-            // Adding oldRole as the second argument makes it appear inside the box
             const newRole = prompt("Enter a new role:", oldRole);
 
             if (newRole === null || newRole.trim() === "" || newRole === oldRole) {
-                alert("No changes were made. You are still a " + oldRole);
+                alert("No changes were made.);
             } else {
                 roleElement.innerHTML = newRole;
                 alert("Roles changed successfully! You are now a " + newRole);
