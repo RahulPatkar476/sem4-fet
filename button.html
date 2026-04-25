@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1 id="name">Rahul Patkar</h1>
+    <h3 id="role-display">Developer</h3>
+    <p id="about">I build web applications and love exploring new tech.</p>
+
+    <button onclick="changeRole()">Change Role</button>
+
+    <script>
+        function changeRole() 
+            const roleElement = document.getElementById("role-display");
+            
+            const oldRole = roleElement.innerText;
+
+            const newRole = prompt("Enter a new role:");
+
+            if (newRole === null || newRole.trim() === "" || newRole === oldRole) {
+                alert("No changes were made.");
+            } else {
+                roleElement.innerHTML = newRole;
+                alert("Roles being changed successfully!");
+            }
+        }
+    </script>
+
+</body>
+</html>
