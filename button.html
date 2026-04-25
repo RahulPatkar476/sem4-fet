@@ -18,10 +18,10 @@
             const newRole = prompt("Enter a new role:");
 
             if (newRole === null || newRole.trim() === "" || newRole === oldRole) {
-                alert("No changes were made.");
+                alert("No changes were made. You are still a " + oldRole);
             } else {
                 roleElement.innerHTML = newRole;
-                alert("Roles being changed successfully!");
+                alert("Roles changed successfully! You are now a " + newRole);
             }
         }
     </script>
