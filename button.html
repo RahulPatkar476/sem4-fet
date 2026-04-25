@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Rahul's Profile</title>
+</head>
 <body>
 
-    <h1 id="name">Rahul Patkar</h1>
+    <h1>Rahul Patkar</h1>
     <h3 id="role-display">Developer</h3>
-    <p id="about">I build web applications and love exploring new tech.</p>
+    <p>I build web applications and love exploring new tech.</p>
 
     <button onclick="changeRole()">Change Role</button>
 
     <script>
-        function changeRole() 
+        function changeRole() {
             const roleElement = document.getElementById("role-display");
-            
             const oldRole = roleElement.innerText;
-
             const newRole = prompt("Enter a new role:");
 
             if (newRole === null || newRole.trim() === "" || newRole === oldRole) {
