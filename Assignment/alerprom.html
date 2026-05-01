@@ -4,27 +4,15 @@
     <title>Rahul's Profile</title>
 </head>
 <body>
-
-    <h1>Rahul Patkar</h1>
-    <h3 id="role-display">Developer</h3>
-    <p>I build web applications and love exploring new tech.</p>
-
-    <button onclick="changeRole()">Change Role</button>
-
-    <script>
-function changeRole() {
-    let roleElement = document.getElementById("role-display");
-    let oldRole = roleElement.innerText;
-    let newRole = prompt("Enter a new role:", oldRole);
-
-    if (newRole === null || newRole.trim() === "" || newRole === oldRole) {
-        alert("No changes were made. You are still a " + oldRole);
-    } else {
-        roleElement.innerHTML = newRole;
-        alert("Roles changed successfully! You are now a " + newRole);
-    }
-}
-    </script>
-
+    <section class="hero">
+        <h1 id="name">Rahul Patkar</h1>
+        <h2 id="role">Aspiring full stack developer</h2>
+        <hr>
+        <p id="description">
+            I am a passionate engineering student with a strong interest in web development.
+        </p>
+        <button onclick="changRole()">Change Role</button>
+    </section>
+    <script src ="script.js"></script>
 </body>
 </html>
