@@ -1,0 +1,10 @@
+body {
+  background: rgb(25, 50, 50);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+ol {
+  display: table;
+  margin: 0 auto;
+}
