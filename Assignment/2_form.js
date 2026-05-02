@@ -4,8 +4,8 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const name = document.getElementById('userName').value.trim();
-    const rating = document.getElementById('userRating').value;
-    const comments = document.getElementById('comments').value.trim();
+    const rating = document.getElementById('userMail').value.trim();
+    const comments = document.getElementById('details').value.trim();
     const resultsContainer = document.getElementById('resultsContainer');
     const displayArea = document.getElementById('displayArea');
 
@@ -13,7 +13,7 @@ form.addEventListener('submit', (event) => {
 
     let hasErrors = false;
 
-    if (!name || !rating || !comments) {
+    if (!name || !mail || !details) {
         alert("Please fill in all mandatory parts!");
         hasErrors = true;
     }
@@ -23,17 +23,12 @@ form.addEventListener('submit', (event) => {
         hasErrors = true;
     }
 
-    if (rating < 1 || rating > 10 || rating === "") {
-        document.getElementById('ratingError').textContent = "Rating must be between 1 and 10.";
-        hasErrors = true;
-    }
-
     if (!hasErrors) {
         resultsContainer.style.display = "block";
         displayArea.innerHTML = `
             <div class="result-item"><strong>Name:</strong> ${name}</div>
-            <div class="result-item"><strong>Rating:</strong> ${rating}/10</div>
-            <div class="result-item"><strong>Comments:</strong> ${comments}</div>
+            <div class="result-item"><strong>Rating:</strong> ${mail}/10</div>
+            <div class="result-item"><strong>Comments:</strong> ${details}</div>
         `;
         form.reset();
     }
