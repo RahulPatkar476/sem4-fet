@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="2_form.css">
+</head>
+<body>
+    <div class="form-wrapper">
+        <h2>Send us Feedback</h2>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="userName">Full Name</label>
+                <input type="text" id="userName" placeholder="Enter your name">
+                <small class="error-msg" id="nameError"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="userRating">Rating (1-10)</label>
+                <input type="number" id="userRating" placeholder="Score">
+                <small class="error-msg" id="ratingError"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <textarea id="comments" rows="4"></textarea>
+                <small class="error-msg" id="commentError"></small>
+            </div>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+    <script src="2_form.js"></script>
+</body>
+</html>
