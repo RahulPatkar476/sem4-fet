@@ -1,40 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Feedback Form</title>
-    <link rel="stylesheet" href="2_form.css">
-</head>
-<body>
-    <div class="form-wrapper">
-        <h2>Send us Feedback</h2>
-        <form id="feedbackForm">
-            <div class="form-group">
-                <label for="userName">Full Name</label>
-                <input type="text" id="userName" placeholder="Enter your name">
-                <small class="error-msg" id="nameError"></small>
-            </div>
+const form = document.getElementById('feedbackForm');
 
-            <div class="form-group">
-                <label for="userMail">E-mail / ID</label>
-                <input type="text" id="userMail" placeholder="Enter identifier">
-                <small class="error-msg" id="mailError"></small>
-            </div>
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-            <div class="form-group">
-                <label for="details">Details</label>
-                <textarea id="details" rows="4"></textarea>
-                <small class="error-msg" id="detailsError"></small>
-            </div>
+    // 1. Grab elements
+    const nameInput = document.getElementById('userName');
+    const mailInput = document.getElementById('userMail');
+    const detailsInput = document.getElementById('details');
+    const resultsBox = document.getElementById('resultsContainer');
+    const displayArea = document.getElementById('displayArea');
 
-            <button type="submit" id="submitBtn">Display Results</button>
-        </form>
+    // 2. Get values
+    const nameVal = nameInput.value.trim();
+    const mailVal = mailInput.value.trim();
+    const detailsVal = detailsInput.value.trim();
 
-        <div id="resultsContainer" class="results-box" style="display: none;">
-            <h3>Submitted Data:</h3>
-            <div id="displayArea"></div>
-        </div>
-    </div>
-    <script src="2_form.js"></script>
-</body>
-</html>
+    // 3. Clear old errors
+    document.querySelectorAll('.error-msg').forEach(el => el.textContent = "");
+
+    let hasErrors = false;
+
+    // 4. Validation
+    if (!nameVal || !mailVal || !detailsVal) {
+        alert("Fill in all parts!");
+        hasErrors = true;
+    }
+
+    if (/\d/.test(nameVal)) {
+        document.getElementById('nameError').textContent = "No numbers allowed in name.";
+        hasErrors = true;
+    }
+
+    // 5. THE DISPLAY PART
+    if (!hasErrors) {
+        console.log("Success! Data caught:", { nameVal, mailVal, detailsVal });
+        
+        // Make the hidden box visible
+        resultsBox.style.display = "block";
+
+        // Inject the text
+        displayArea.innerHTML = `
+            <div class="result-item"><strong>User:</strong> ${nameVal}</div>
+            <div class="result-item"><strong>Mail/ID:</strong> ${mailVal}</div>
+            <div class="result-item"><strong>Message:</strong> ${detailsVal}</div>
+        `;
+
+        // Clear form for next entry
+        form.reset();
+    }
+});
