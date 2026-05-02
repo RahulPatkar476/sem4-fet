@@ -1,7 +1,7 @@
 let roles = [
   "Aspiring Full Stack Developer",
   "Frontend Developer",
-  "JavaScript Enthusiast", // Fixed: replaced colon with quote
+  "JavaScript Enthusiast",
   "Future Software Engineer"
 ];
 
@@ -9,9 +9,8 @@ let index = 0;
 
 function changeRole() {
   const roleElement = document.getElementById("role");
-  const currentRole = roleElement.textContent; // Fixed spelling: currentRole
+  const currentRole = roleElement.textContent;
   
-  // Fixed: prompt (not promt)
   let newRole = prompt("What is your new professional role?", currentRole);
   
   if (newRole && newRole.trim() !== "") {
@@ -26,7 +25,6 @@ const searchInput = document.getElementById('project-search');
 const cards = document.querySelectorAll('.card');
 
 searchInput.addEventListener('keyup', function(event) {
-  // Fixed spelling: searchTerm
   const searchTerm = event.target.value.toLowerCase();
   
   cards.forEach(card => {
