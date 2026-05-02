@@ -1,51 +1,35 @@
 const form = document.getElementById('feedbackForm');
+const resultsContainer = document.getElementById('resultsContainer');
+const displayArea = document.getElementById('displayArea');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    // 1. Grab elements
-    const nameInput = document.getElementById('userName');
-    const mailInput = document.getElementById('userMail');
-    const detailsInput = document.getElementById('details');
-    const resultsBox = document.getElementById('resultsContainer');
-    const displayArea = document.getElementById('displayArea');
+    const name = document.getElementById('userName').value.trim();
+    const mail = document.getElementById('userMail').value.trim();
+    const details = document.getElementById('details').value.trim();
 
-    // 2. Get values
-    const nameVal = nameInput.value.trim();
-    const mailVal = mailInput.value.trim();
-    const detailsVal = detailsInput.value.trim();
-
-    // 3. Clear old errors
     document.querySelectorAll('.error-msg').forEach(el => el.textContent = "");
 
     let hasErrors = false;
 
-    // 4. Validation
-    if (!nameVal || !mailVal || !detailsVal) {
-        alert("Fill in all parts!");
+    if (!name || !mail || !details) {
+        alert("Please fill in all mandatory parts!");
         hasErrors = true;
     }
 
-    if (/\d/.test(nameVal)) {
-        document.getElementById('nameError').textContent = "No numbers allowed in name.";
+    if (/\d/.test(name)) {
+        document.getElementById('nameError').textContent = "Name cannot contain numbers.";
         hasErrors = true;
     }
 
-    // 5. THE DISPLAY PART
     if (!hasErrors) {
-        console.log("Success! Data caught:", { nameVal, mailVal, detailsVal });
-        
-        // Make the hidden box visible
-        resultsBox.style.display = "block";
-
-        // Inject the text
+        resultsContainer.style.display = "block";
         displayArea.innerHTML = `
-            <div class="result-item"><strong>User:</strong> ${nameVal}</div>
-            <div class="result-item"><strong>Mail/ID:</strong> ${mailVal}</div>
-            <div class="result-item"><strong>Message:</strong> ${detailsVal}</div>
+            <div class="result-item"><strong>Name:</strong> ${name}</div>
+            <div class="result-item"><strong>Identifier:</strong> ${mail}</div>
+            <div class="result-item"><strong>Details:</strong> ${details}</div>
         `;
-
-        // Clear form for next entry
         form.reset();
     }
 });
