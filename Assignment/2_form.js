@@ -16,7 +16,7 @@ form.addEventListener('submit', (event) => {
 
     // Check 1: Mandatory Fields
     if (!name || !rating || !comments) {
-        alert("🚨 Please fill in all mandatory parts!");
+        alert("Please fill in all mandatory parts!");
         hasErrors = true;
     }
 
@@ -35,7 +35,7 @@ form.addEventListener('submit', (event) => {
 
     // 3. Final Result
     if (!hasErrors) {
-        alert("✅ Success! Thank you for your feedback.");
+        alert("Success! Thank you for your feedback.");
         form.reset(); // Clear the form
     }
 });
