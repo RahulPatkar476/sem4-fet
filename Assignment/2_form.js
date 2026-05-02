@@ -1,4 +1,6 @@
 const form = document.getElementById('feedbackForm');
+const resultsContainer = document.getElementById('resultsContainer');
+const displayArea = document.getElementById('displayArea');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -6,8 +8,6 @@ form.addEventListener('submit', (event) => {
     const name = document.getElementById('userName').value.trim();
     const mail = document.getElementById('userMail').value.trim();
     const details = document.getElementById('details').value.trim();
-    const resultsContainer = document.getElementById('resultsContainer');
-    const displayArea = document.getElementById('displayArea');
 
     document.querySelectorAll('.error-msg').forEach(el => el.textContent = "");
 
@@ -23,16 +23,11 @@ form.addEventListener('submit', (event) => {
         hasErrors = true;
     }
 
-    if (mail !== "" && !mail.includes("@")) {
-        document.getElementById('mailError').textContent = "Please enter a valid email.";
-        hasErrors = true;
-    }
-
     if (!hasErrors) {
         resultsContainer.style.display = "block";
         displayArea.innerHTML = `
             <div class="result-item"><strong>Name:</strong> ${name}</div>
-            <div class="result-item"><strong>Email:</strong> ${mail}</div>
+            <div class="result-item"><strong>Identifier:</strong> ${mail}</div>
             <div class="result-item"><strong>Details:</strong> ${details}</div>
         `;
         form.reset();
