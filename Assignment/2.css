@@ -1,0 +1,18 @@
+body { font-family: sans-serif; background: #f4f4f9; padding: 40px; }
+.skills-wrapper { max-width: 500px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+/* Ordered List (Main Categories) */
+ol.main-categories { font-weight: bold; font-size: 1.2rem; color: #2c3e50; }
+ol.main-categories > li { margin-bottom: 20px; }
+
+/* Unordered List (Specific Skills) */
+ul.skill-items {
+    font-weight: normal;
+    font-size: 1rem;
+    color: #555;
+    margin-top: 8px;
+    list-style-type: square; /* Specific bullet style */
+}
+
+ul.skill-items li { padding: 4px 0; border-bottom: 1px solid #eee; width: 80%; }
+ul.skill-items li:last-child { border: none; }
