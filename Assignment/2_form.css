@@ -1,0 +1,32 @@
+.form-wrapper {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 8px;
+    font-family: sans-serif;
+}
+
+.form-group { margin-bottom: 15px; }
+
+label { display: block; margin-bottom: 5px; font-weight: bold; }
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box; /* Ensures padding doesn't break the width */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: cyan;
+    border: 1px solid #008b8b;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.error-msg { color: #d63031; font-size: 12px; display: block; margin-top: 4px; }
