@@ -8,6 +8,7 @@ let roles = [
 let index = 0;
 
 function changeRole() {
+  debugger;
   const roleElement = document.getElementById("role");
   const currentRole = roleElement.textContent;
   
@@ -20,6 +21,7 @@ function changeRole() {
     alert("No changes made.");
   }
 }
+
 
 const searchInput = document.getElementById('project-search');
 const cards = document.querySelectorAll('.card');
