@@ -1,40 +1,31 @@
-const technicalData = [
-    {
-        category: "Frontend Development",
-        skills: ["HTML5 & CSS3", "Modern JavaScript (ES6+)", "React.js Framework"]
-    },
-    {
-        category: "Backend Systems",
-        skills: ["Node.js Runtime", "RESTful API Design", "PostgreSQL Databases"]
-    },
-    {
-        category: "DevOps & Tools",
-        skills: ["Git Version Control", "Docker Containers", "AWS Cloud Services"]
-    }
-];
-
-const container = document.getElementById('skillsContainer');
-
-// Create the parent Ordered List
-const ol = document.createElement('ol');
-ol.className = "main-categories";
+// ... existing technicalData and container code ...
 
 technicalData.forEach(item => {
-    // Create Category (LI for OL)
     const categoryLi = document.createElement('li');
     categoryLi.textContent = item.category;
 
-    // Create Skills List (Nested UL)
     const skillsUl = document.createElement('ul');
     skillsUl.className = "skill-items";
 
     item.skills.forEach(skill => {
         const skillLi = document.createElement('li');
-        skillLi.textContent = skill;
+        skillLi.className = "skill-row"; // Added a class for styling
+        
+        // 1. Add the text
+        const textSpan = document.createElement('span');
+        textSpan.textContent = skill;
+        
+        // 2. Create the "Remove" button
+        const btn = document.createElement('button');
+        btn.textContent = "×";
+        btn.className = "delete-btn";
+        btn.onclick = () => skillLi.remove(); // The "Magic" that deletes the line
+
+        skillLi.appendChild(textSpan);
+        skillLi.appendChild(btn);
         skillsUl.appendChild(skillLi);
     });
 
-    // Nest the UL inside the Category LI
     categoryLi.appendChild(skillsUl);
     ol.appendChild(categoryLi);
 });
