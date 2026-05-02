@@ -1,3 +1,8 @@
+body {
+    background-color: #f0f2f5;
+    padding: 20px;
+}
+
 .form-wrapper {
     max-width: 400px;
     margin: 40px auto;
@@ -6,16 +11,23 @@
     border: 2px solid #333;
     border-radius: 8px;
     font-family: sans-serif;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.form-group { margin-bottom: 15px; }
+.form-group {
+    margin-bottom: 15px;
+}
 
-label { display: block; margin-bottom: 5px; font-weight: bold; }
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 
 input, textarea {
     width: 100%;
     padding: 8px;
-    box-sizing: border-box; /* Ensures padding doesn't break the width */
+    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -27,6 +39,32 @@ button {
     border: 1px solid #008b8b;
     cursor: pointer;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
-.error-msg { color: #d63031; font-size: 12px; display: block; margin-top: 4px; }
+button:hover {
+    background: #00e5e5;
+}
+
+.error-msg {
+    color: #d63031;
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
+    min-height: 15px;
+}
+
+.results-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e1f5fe;
+    border: 1px dashed #01579b;
+    border-radius: 8px;
+}
+
+.result-item {
+    margin-bottom: 8px;
+    font-family: Arial, sans-serif;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 4px;
+}
