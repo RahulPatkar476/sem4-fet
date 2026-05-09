@@ -1,0 +1,33 @@
+body {
+  background: rgb(25, 50, 50);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 8px 15px;
+  margin: 10px 5px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+ol {
+  display: table;
+  margin: 0 auto;
+  text-align: left;
+}
+
+li {
+  margin: 5px 0;
+}
