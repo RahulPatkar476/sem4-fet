@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #1e293b;
+    padding: 30px;
+    text-align: center;
+}
+
+.container {
+    padding: 40px;
+    text-align: center;
+}
+
+.card {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #3b82f6;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #2563eb;
+}
+
+.status-box {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    text-align: center;
+}
+
+#access-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.success {
+    color: #4ade80;
+}
+
+.denied {
+    color: #f87171;
+}
