@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 9: Form Processing</title>
+    <link rel="stylesheet" href="nine.css">
+</head>
+<body>
+
+    <header>
+        <h1>Course Registration System</h1>
+    </header>
+
+    <div class="container">
+        <form id="regForm" onsubmit="processForm(event)">
+            
+            <fieldset>
+                <legend>Select Your Domain</legend>
+                <label>
+                    <input type="radio" name="domain" value="Full Stack Development" required>
+                    Full Stack Development
+                </label>
+                <label>
+                    <input type="radio" name="domain" value="Data Science">
+                    Data Science
+                </label>
+                <label>
+                    <input type="radio" name="domain" value="Cyber Security">
+                    Cyber Security
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Select Core Modules</legend>
+                <label>
+                    <input type="checkbox" name="modules" value="HTML/CSS/JS">
+                    HTML/CSS/JavaScript
+                </label>
+                <label>
+                    <input type="checkbox" name="modules" value="Python/SQL">
+                    Python & SQL
+                </label>
+                <label>
+                    <input type="checkbox" name="modules" value="React/Node.js">
+                    React & Node.js
+                </label>
+                <label>
+                    <input type="checkbox" name="modules" value="Cloud Computing">
+                    Cloud Computing
+                </label>
+            </fieldset>
+
+            <button type="submit" class="btn">Submit Application</button>
+        </form>
+
+        <div id="summary-box" class="summary-box hidden">
+            <h2>Registration Summary</h2>
+            <p><strong>Selected Domain:</strong> <span id="out-domain"></span></p>
+            <p><strong>Selected Modules:</strong></p>
+            <ul id="out-modules"></ul>
+        </div>
+    </div>
+
+    <script src="nine.js"></script>
+</body>
+</html>
