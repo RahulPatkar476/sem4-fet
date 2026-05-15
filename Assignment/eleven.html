@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Index Layer Toggle</title>
+
+    <link rel="stylesheet" href="zindex.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Z-Index Layer Switcher</h2>
+
+        <button onclick="showLayer('layer1')">Show Red</button>
+
+        <button onclick="showLayer('layer2')">Show Blue</button>
+
+        <button onclick="showLayer('layer3')">Show Green</button>
+
+        <div class="content-box">
+
+            <div id="layer1" class="layer active">
+                LAYER 1 (RED)
+            </div>
+
+            <div id="layer2" class="layer">
+                LAYER 2 (BLUE)
+            </div>
+
+            <div id="layer3" class="layer">
+                LAYER 3 (GREEN)
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="zindex.js"></script>
+
+</body>
+</html>
