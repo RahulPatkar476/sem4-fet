@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1e293b;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #3b82f6;
+}
+
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+fieldset {
+    border: 2px solid #334155;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #1e293b;
+}
+
+legend {
+    font-weight: bold;
+    color: #3b82f6;
+    padding: 0 10px;
+    font-size: 1.1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.1);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2563eb;
+}
+
+.summary-box {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #1e293b;
+    border: 2px dashed #4ade80;
+    border-radius: 8px;
+}
+
+.hidden {
+    display: none;
+}
+
+ul {
+    padding-left: 20px;
+    margin: 5px 0;
+}
+
+li {
+    margin-bottom: 5px;
+    color: #4ade80;
+}
