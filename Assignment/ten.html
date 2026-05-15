@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 10</title>
+    <link rel="stylesheet" href="ten.css">
+</head>
+<body>
+
+    <h2>Select Options</h2>
+
+    <label for="dropdown">Choose Option (Dropdown):</label>
+    <select id="dropdown">
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+    </select>
+
+    <br><br>
+
+    <label for="listbox">Choose Multiple (Listbox):</label>
+    <select id="listbox" size="3" multiple>
+        <option value="Pizza">Pizza</option>
+        <option value="Burger">Burger</option>
+        <option value="Pasta">Pasta</option>
+    </select>
+
+    <h3>Selection Results</h3>
+    <p>Dropdown: <span id="res-drop">Red</span></p>
+    <p>Listbox Choices:</p>
+    <ul id="res-list"></ul>
+
+    <script src="ten.js"></script>
+</body>
+</html>
