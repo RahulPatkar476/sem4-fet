@@ -8,7 +8,7 @@ function startAuth() {
     do {
         inputPin = prompt("Enter the 4-digit Secret PIN:");
         if (inputPin === null) {
-            messageElement.innerHTML = "⚠ Authentication Cancelled.";
+            messageElement.innerHTML = "Authentication Cancelled.";
             messageElement.className = "denied";
             return;
         }
