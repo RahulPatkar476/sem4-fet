@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Village Water Transfer System</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#eef7ff;
+      color:#222;
+    }
+
+    header{
+      background:linear-gradient(135deg,#0077b6,#00b4d8);
+      color:white;
+      padding:20px;
+      text-align:center;
+    }
+
+    header h1{
+      font-size:2.5rem;
+      margin-bottom:10px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:40px 20px;
+    }
+
+    .hero p{
+      max-width:700px;
+      margin:auto;
+      line-height:1.6;
+      font-size:18px;
+    }
+
+    .container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:20px;
+      padding:30px;
+    }
+
+    .card{
+      background:white;
+      border-radius:15px;
+      padding:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card h2{
+      color:#0077b6;
+      margin-bottom:15px;
+    }
+
+    ul{
+      list-style:none;
+    }
+
+    ul li{
+      padding:10px;
+      border-bottom:1px solid #ddd;
+    }
+
+    .transfer-box{
+      width:90%;
+      max-width:500px;
+      margin:40px auto;
+      background:white;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .transfer-box h2{
+      text-align:center;
+      margin-bottom:20px;
+      color:#0077b6;
+    }
+
+    select,
+    input{
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border:1px solid #ccc;
+      border-radius:10px;
+      font-size:16px;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      background:#0077b6;
+      color:white;
+      border:none;
+      border-radius:10px;
+      font-size:18px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#023e8a;
+    }
+
+    #message{
+      margin-top:15px;
+      text-align:center;
+      font-weight:bold;
+      color:green;
+    }
+
+    footer{
+      background:#023e8a;
+      color:white;
+      text-align:center;
+      padding:15px;
+      margin-top:30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>💧 Village Water Transfer System</h1>
+    <p>Helping villages share water resources efficiently</p>
+  </header>
+
+  <section class="hero">
+    <h2>Smart Water Sharing</h2>
+    <p>
+      This project helps transfer water from villages with excess water
+      to villages facing water shortages.
+    </p>
+  </section>
+
+  <section class="container">
+
+    <div class="card">
+      <h2>Villages With Water</h2>
+      <ul>
+        <li>Green Village - 5000 Liters</li>
+        <li>River Town - 3000 Liters</li>
+        <li>Blue Lake - 7000 Liters</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Villages Needing Water</h2>
+      <ul>
+        <li>Dry Hills - Need 2000 Liters</li>
+        <li>Sun Village - Need 1500 Liters</li>
+        <li>Dusty Plains - Need 4000 Liters</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <div class="transfer-box">
+    <h2>Transfer Water</h2>
+
+    <form id="waterForm">
+
+      <select id="source" required>
+        <option value="">Select Source Village</option>
+        <option>Green Village</option>
+        <option>River Town</option>
+        <option>Blue Lake</option>
+      </select>
+
+      <select id="destination" required>
+        <option value="">Select Destination Village</option>
+        <option>Dry Hills</option>
+        <option>Sun Village</option>
+        <option>Dusty Plains</option>
+      </select>
+
+      <input type="number" id="amount" placeholder="Enter Water Amount (Liters)" required>
+
+      <button type="submit">Transfer Water</button>
+
+      <p id="message"></p>
+
+    </form>
+  </div>
+
+  <footer>
+    <p>© 2026 Village Water Transfer System</p>
+  </footer>
+
+  <script>
+
+    const form = document.getElementById("waterForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event){
+
+      event.preventDefault();
+
+      const source = document.getElementById("source").value;
+      const destination = document.getElementById("destination").value;
+      const amount = document.getElementById("amount").value;
+
+      if(source === destination){
+        message.style.color = "red";
+        message.innerHTML = "Source and destination villages cannot be same!";
+        return;
+      }
+
+      message.style.color = "green";
+      message.innerHTML =
+        `✅ ${amount} Liters transferred successfully from ${source} to ${destination}`;
+
+      form.reset();
+
+    });
+
+  </script>
+
+</body>
+</html>
