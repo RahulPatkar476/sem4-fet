@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Village Water Transfer System</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background: #f0f4f8;
+      color: #222;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0077b6, #00b4d8);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      padding: 20px 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .card h2 {
+      color: #0077b6;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      border-bottom: 2px solid #eef7ff;
+      padding-bottom: 10px;
+    }
+
+    /* Management Section */
+    .add-section {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 1px dashed #bbb;
+    }
+
+    .add-form {
+      display: flex;
+      gap: 5px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .btn-add {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 0 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    ul li {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .li-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vol-label {
+      font-weight: bold;
+      color: #0077b6;
+      background: #e1f5fe;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    .price-tag {
+      font-size: 11px;
+      color: #52c41a;
+      font-weight: bold;
+    }
+
+    .need-label {
+      color: #d32f2f;
+      background: #ffebee;
+    }
+
+    /* Transfer & Payment UI */
+    .transfer-box {
+      width: 95%;
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .transfer-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #0077b6;
+    }
+
+    .payment-summary {
+      background: #f6ffed;
+      border: 1px solid #b7eb8f;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    .payment-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .total-price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #389e0d;
+      border-top: 1px solid #b7eb8f;
+      padding-top: 10px;
+      margin-top: 5px;
+    }
+
+    /* Payment Methods */
+    .payment-options {
+      margin-top: 20px;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .method-item {
+      border: 2px solid #e0e0e0;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .method-item:hover {
+      background: #f8f9fa;
+    }
+
+    .method-item.selected {
+      border-color: #0077b6;
+      background: #e6f7ff;
+    }
+
+    .method-detail {
+      margin-top: 15px;
+      padding: 10px;
+      background: #fffbe6;
+      border: 1px solid #ffe58f;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .transfer-btn {
+      width: 100%;
+      padding: 15px;
+      background: #52c41a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .transfer-btn:hover { background: #389e0d; }
+
+    #message {
+      margin-top: 20px;
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #002333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .qr-sim {
+      width: 80px;
+      height: 80px;
+      background: #333;
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>💧 Village Water Transfer & Revenue</h1>
+    <p>Empowering villages to earn from surplus water resources</p>
+  </header>
+
+  <section class="container">
+    <!-- List 1: Villages with Water -->
+    <div class="card">
+      <h2>Villages With Water</h2>
+      <div class="add-section">
+        <p style="font-size: 11px; margin-bottom: 5px; color: #666;">Rate: ₹2.00 per Liter</p>
+        <div class="add-form">
+          <input type="text" id="hasWaterName" placeholder="Village Name">
+          <input type="number" id="hasWaterVol" placeholder="Liters">
+          <button class="btn-add" onclick="addNewVillage('has')">Add</button>
+        </div>
+      </div>
+      <ul id="listHasWater"></ul>
+    </div>
+
+    <!-- List 2: Villages Needing Water -->
+    <div class="card">
+      <h2>Villages Needing Water</h2>
+      <div class="add-section">
+        <div class="add-form">
+          <input type="text" id="needsWaterName" placeholder="Village Name">
+          <input type="number" id="needsWaterVol" placeholder="Liters Needed">
+          <button class="btn-add" onclick="addNewVillage('needs')">Add</button>
+        </div>
+      </div>
+      <ul id="listNeedsWater"></ul>
+    </div>
+  </section>
+
+  <div class="transfer-box">
+    <h2>Secure Transfer Request</h2>
+
+    <form id="waterForm">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div>
+          <label style="font-size: 12px; font-weight: bold;">From (Seller)</label>
+          <select id="source" required onchange="calculatePrice()">
+            <option value="">Select Village...</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 12px; font-weight: bold;">To (Buyer)</label>
+          <select id="destination" required>
+            <option value="">Select Village...</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top: 15px;">
+        <label style="font-size: 12px; font-weight: bold;">Transfer Volume (Liters)</label>
+        <input type="number" id="amount" placeholder="Enter Amount" min="1" required oninput="calculatePrice()">
+      </div>
+
+      <!-- Rupee Payment Section -->
+      <div class="payment-summary">
+        <div class="payment-row">
+          <span>Water Value (₹2/L):</span>
+          <span id="costWater">₹0.00</span>
+        </div>
+        <div class="payment-row">
+          <span>Transport Fee:</span>
+          <span id="costTransport">₹150.00</span>
+        </div>
+        <div class="payment-row total-price">
+          <span>Total Payable:</span>
+          <span id="totalBill">₹0.00</span>
+        </div>
+      </div>
+
+      <!-- Payment Method Selection -->
+      <div class="payment-options">
+        <label style="font-size: 12px; font-weight: bold; color: #555;">Select Payment Method</label>
+        <div class="method-grid">
+          <div class="method-item selected" id="methodUPI" onclick="selectPaymentMethod('UPI')">
+            <span>📱 UPI</span>
+            <small style="display:block; font-size:10px;">PhonePe / GPay</small>
+          </div>
+          <div class="method-item" id="methodCOD" onclick="selectPaymentMethod('COD')">
+            <span>💵 Cash</span>
+            <small style="display:block; font-size:10px;">Pay on Arrival</small>
+          </div>
+        </div>
+
+        <div id="upiDetail" class="method-detail" style="display: block;">
+          <div class="qr-sim">QR CODE</div>
+          <p style="text-align:center;">Scan to pay instantly to Village Fund</p>
+        </div>
+        <div id="codDetail" class="method-detail">
+          <p style="text-align:center;">🚚 Handover cash to the tanker driver upon delivery.</p>
+        </div>
+      </div>
+
+      <button type="submit" class="transfer-btn">Confirm & Initiate Transfer</button>
+
+      <div id="message"></div>
+    </form>
+  </div>
+
+  <footer>
+    <p>© 2026 Village Water Network | Secure Payments via UPI & COD</p>
+  </footer>
+
+  <script>
+    const RATE_PER_LITER = 2;
+    const FIXED_TAX = 150;
+    let currentPaymentMethod = 'UPI';
+
+    let villagesWithWater = [
+      { name: "Green Village", volume: 5000 },
+      { name: "River Town", volume: 3000 }
+    ];
+
+    let villagesNeedingWater = [
+      { name: "Dry Hills", volume: 2000 },
+      { name: "Sun Village", volume: 1500 }
+    ];
+
+    function refreshData() {
+      const listHas = document.getElementById("listHasWater");
+      const listNeeds = document.getElementById("listNeedsWater");
+      const sourceSelect = document.getElementById("source");
+      const destSelect = document.getElementById("destination");
+
+      listHas.innerHTML = "";
+      listNeeds.innerHTML = "";
+      sourceSelect.innerHTML = '<option value="">Select Village...</option>';
+      destSelect.innerHTML = '<option value="">Select Village...</option>';
+
+      villagesWithWater.forEach(v => {
+        const value = v.volume * RATE_PER_LITER;
+        listHas.innerHTML += `
+          <li>
+            <div class="li-header">
+              <span>${v.name}</span>
+              <span class="vol-label">${v.volume} L</span>
+            </div>
+            <div class="price-tag">Potential Earnings: ₹${value.toLocaleString()}</div>
+          </li>`;
+        sourceSelect.innerHTML += `<option value="${v.name}">${v.name}</option>`;
+      });
+
+      villagesNeedingWater.forEach(v => {
+        listNeeds.innerHTML += `
+          <li>
+            <div class="li-header">
+              <span>${v.name}</span>
+              <span class="vol-label need-label">Need ${v.volume} L</span>
+            </div>
+          </li>`;
+        destSelect.innerHTML += `<option value="${v.name}">${v.name}</option>`;
+      });
+    }
+
+    function addNewVillage(type) {
+      const nameId = type === 'has' ? 'hasWaterName' : 'needsWaterName';
+      const volId = type === 'has' ? 'hasWaterVol' : 'needsWaterVol';
+      
+      const name = document.getElementById(nameId).value;
+      const vol = parseInt(document.getElementById(volId).value);
+
+      if (name && vol > 0) {
+        if (type === 'has') villagesWithWater.push({ name, volume: vol });
+        else villagesNeedingWater.push({ name, volume: vol });
+        
+        document.getElementById(nameId).value = "";
+        document.getElementById(volId).value = "";
+        refreshData();
+      }
+    }
+
+    function calculatePrice() {
+      const amount = parseInt(document.getElementById("amount").value) || 0;
+      const waterValue = amount * RATE_PER_LITER;
+      const total = amount > 0 ? (waterValue + FIXED_TAX) : 0;
+
+      document.getElementById("costWater").innerText = `₹${waterValue.toFixed(2)}`;
+      document.getElementById("costTransport").innerText = amount > 0 ? `₹${FIXED_TAX.toFixed(2)}` : `₹0.00`;
+      document.getElementById("totalBill").innerText = `₹${total.toFixed(2)}`;
+    }
+
+    function selectPaymentMethod(method) {
+      currentPaymentMethod = method;
+      document.getElementById('methodUPI').classList.remove('selected');
+      document.getElementById('methodCOD').classList.remove('selected');
+      
+      document.getElementById('upiDetail').style.display = 'none';
+      document.getElementById('codDetail').style.display = 'none';
+
+      if(method === 'UPI') {
+        document.getElementById('methodUPI').classList.add('selected');
+        document.getElementById('upiDetail').style.display = 'block';
+      } else {
+        document.getElementById('methodCOD').classList.add('selected');
+        document.getElementById('codDetail').style.display = 'block';
+      }
+    }
+
+    document.getElementById("waterForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const sName = document.getElementById("source").value;
+      const dName = document.getElementById("destination").value;
+      const amount = parseInt(document.getElementById("amount").value);
+      const msg = document.getElementById("message");
+
+      const sIdx = villagesWithWater.findIndex(v => v.name === sName);
+      const dIdx = villagesNeedingWater.findIndex(v => v.name === dName);
+
+      if (sName === dName) {
+        showMsg("❌ Error: Select a different destination village.", "error");
+        return;
+      }
+
+      if (villagesWithWater[sIdx].volume < amount) {
+        showMsg("❌ Error: Insufficient stock in " + sName, "error");
+        return;
+      }
+
+      // Logic update
+      villagesWithWater[sIdx].volume -= amount;
+      villagesNeedingWater[dIdx].volume = Math.max(0, villagesNeedingWater[dIdx].volume - amount);
+
+      const earning = amount * RATE_PER_LITER;
+      const payMsg = currentPaymentMethod === 'UPI' ? 'UPI Payment Verified' : 'Cash on Delivery Scheduled';
+      
+      showMsg(`✅ <strong>${payMsg}!</strong><br>${sName} earned ₹${earning.toLocaleString()}.<br>Tanker dispatched to ${dName}.`, "success");
+      
+      this.reset();
+      calculatePrice();
+      refreshData();
+      selectPaymentMethod('UPI');
+    });
+
+    function showMsg(text, type) {
+      const msg = document.getElementById("message");
+      msg.style.display = "block";
+      msg.style.background = type === "success" ? "#f6ffed" : "#fff1f0";
+      msg.style.color = type === "success" ? "#389e0d" : "#cf1322";
+      msg.style.border = `1px solid ${type === "success" ? "#b7eb8f" : "#ffa39e"}`;
+      msg.innerHTML = text;
+      setTimeout(() => msg.style.display = "none", 8000);
+    }
+
+    refreshData();
+  </script>
+
+</body>
+</html>
