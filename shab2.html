@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Village Water Management</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+color:#222;
+transition:0.3s;
+}
+
+.dark{
+background:#121212;
+color:white;
+}
+
+/* WELCOME PAGE */
+
+#welcomePage{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:linear-gradient(135deg,#0077b6,#00b4d8);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.welcome-box{
+text-align:center;
+color:white;
+padding:40px;
+animation:fadeIn 1s ease;
+}
+
+.welcome-box h1{
+font-size:45px;
+margin-bottom:20px;
+}
+
+.welcome-box p{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.welcome-box button{
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:white;
+color:#0077b6;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+}
+
+.welcome-box button:hover{
+transform:scale(1.05);
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* HEADER */
+
+header{
+background:linear-gradient(135deg,#0077b6,#00b4d8);
+padding:25px;
+text-align:center;
+color:white;
+}
+
+.top-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.toggle-btn{
+padding:10px 15px;
+border:none;
+background:#0077b6;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.stat-card{
+background:white;
+padding:20px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.stat-card:hover{
+transform:translateY(-5px);
+}
+
+.dark .stat-card{
+background:#1f1f1f;
+}
+
+.stat-card h3{
+margin-bottom:10px;
+color:#0077b6;
+}
+
+/* CONTAINER */
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dark .card{
+background:#1f1f1f;
+}
+
+.add-form{
+display:flex;
+gap:10px;
+margin-bottom:15px;
+flex-wrap:wrap;
+}
+
+input,select{
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+width:100%;
+}
+
+.btn{
+padding:10px 15px;
+border:none;
+background:#0077b6;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+ul{
+list-style:none;
+}
+
+li{
+padding:12px;
+border-bottom:1px solid #ddd;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.progress{
+width:100%;
+height:8px;
+background:#ddd;
+border-radius:10px;
+overflow:hidden;
+margin-top:5px;
+}
+
+.fill{
+height:100%;
+background:#00b4d8;
+}
+
+.delete-btn{
+background:red;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* BOXES */
+
+.transfer-box,
+.history,
+.chart-box{
+width:95%;
+max-width:1100px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dark .transfer-box,
+.dark .history,
+.dark .chart-box{
+background:#1f1f1f;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.summary{
+background:#eef;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+}
+
+.transfer-btn{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+background:green;
+color:white;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #ccc;
+text-align:center;
+}
+
+footer{
+margin-top:40px;
+background:#002333;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.add-form{
+flex-direction:column;
+}
+
+table{
+display:block;
+overflow-x:auto;
+}
+
+.welcome-box h1{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME PAGE -->
+
+<div id="welcomePage">
+
+<div class="welcome-box">
+
+<h1>💧 Smart Village Water Management</h1>
+
+<p>
+Welcome to the Smart Water Sharing Network
+</p>
+
+<button onclick="enterWebsite()">
+Enter Website
+</button>
+
+</div>
+
+</div>
+
+<header>
+<h1>
+<i class="fa-solid fa-droplet"></i>
+Smart Village Water Management
+</h1>
+
+<p>
+Water Sharing & Revenue System
+</p>
+</header>
+
+<div class="top-bar">
+
+<h2>Dashboard</h2>
+
+<div style="display:flex; gap:10px;">
+
+<button class="toggle-btn"
+onclick="toggleDarkMode()">
+🌙 Dark Mode
+</button>
+
+<button class="toggle-btn"
+onclick="downloadCSV()">
+⬇ Export CSV
+</button>
+
+</div>
+
+</div>
+
+<!-- STATS -->
+
+<section class="stats">
+
+<div class="stat-card">
+<h3>Total Water</h3>
+<p id="totalWater">0 L</p>
+</div>
+
+<div class="stat-card">
+<h3>Total Need</h3>
+<p id="totalNeed">0 L</p>
+</div>
+
+<div class="stat-card">
+<h3>Total Revenue</h3>
+<p id="totalRevenue">₹0</p>
+</div>
+
+<div class="stat-card">
+<h3>Total Transfers</h3>
+<p id="totalTransfers">0</p>
+</div>
+
+</section>
+
+<!-- VILLAGES -->
+
+<section class="container">
+
+<div class="card">
+
+<h2>Villages With Water</h2>
+
+<input type="text"
+id="searchHas"
+placeholder="Search village..."
+onkeyup="refreshUI()">
+
+<div class="add-form">
+
+<input type="text"
+id="hasName"
+placeholder="Village Name">
+
+<input type="number"
+id="hasVol"
+placeholder="Liters">
+
+<button class="btn"
+onclick="addVillage('has')">
+Add
+</button>
+
+</div>
+
+<ul id="hasList"></ul>
+
+</div>
+
+<div class="card">
+
+<h2>Villages Needing Water</h2>
+
+<input type="text"
+id="searchNeed"
+placeholder="Search village..."
+onkeyup="refreshUI()">
+
+<div class="add-form">
+
+<input type="text"
+id="needName"
+placeholder="Village Name">
+
+<input type="number"
+id="needVol"
+placeholder="Liters">
+
+<button class="btn"
+onclick="addVillage('need')">
+Add
+</button>
+
+</div>
+
+<ul id="needList"></ul>
+
+</div>
+
+</section>
+
+<!-- TRANSFER -->
+
+<div class="transfer-box">
+
+<h2>Water Transfer</h2>
+
+<form id="transferForm">
+
+<div class="grid">
+
+<div>
+<label>Seller Village</label>
+<select id="source"></select>
+</div>
+
+<div>
+<label>Buyer Village</label>
+<select id="destination"></select>
+</div>
+
+</div>
+
+<div style="margin-top:15px;">
+<label>Transfer Amount</label>
+<input type="number"
+id="amount"
+oninput="calculateBill()"
+required>
+</div>
+
+<div style="margin-top:15px;">
+<label>Customer Name</label>
+<input type="text"
+id="customerName"
+required>
+</div>
+
+<div style="margin-top:15px;">
+<label>Customer Phone</label>
+<input type="tel"
+id="customerPhone"
+required>
+</div>
+
+<div style="margin-top:15px;">
+<label>Payment Method</label>
+
+<select id="paymentMethod" required>
+
+<option value="">Select</option>
+
+<option>Cash</option>
+<option>UPI</option>
+<option>Google Pay</option>
+<option>PhonePe</option>
+<option>Paytm</option>
+<option>Credit Card</option>
+<option>Debit Card</option>
+
+</select>
+
+</div>
+
+<div class="summary">
+
+<p>
+Water Cost:
+<span id="waterCost">₹0</span>
+</p>
+
+<p>
+Transport Fee:
+₹150
+</p>
+
+<h3>
+Total:
+<span id="totalBill">₹0</span>
+</h3>
+
+</div>
+
+<button class="transfer-btn">
+Confirm Transfer
+</button>
+
+</form>
+
+</div>
+
+<!-- CHART -->
+
+<div class="chart-box">
+
+<h2>Water Analytics</h2>
+
+<canvas id="waterChart"></canvas>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="history">
+
+<h2 style="margin-bottom:15px;">
+Transfer History
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Liters</th>
+<th>Revenue</th>
+<th>Customer</th>
+<th>Customer Phone</th>
+<th>Payment</th>
+<th>Date</th>
+</tr>
+
+</thead>
+
+<tbody id="historyBody"></tbody>
+
+</table>
+
+</div>
+
+<!-- CUSTOMER HELP -->
+
+<div class="history">
+
+<h2 style="color:#0077b6; margin-bottom:15px;">
+💡 Customer Support & Safety Tips
+</h2>
+
+<div style="line-height:2; font-size:16px;">
+
+<p>
+✅ Verify seller village and owner phone number before payment.
+</p>
+
+<p>
+✅ Collect water transfer receipt after transaction.
+</p>
+
+<p>
+✅ Use trusted payment methods.
+</p>
+
+<p>
+✅ Save water and avoid unnecessary usage.
+</p>
+
+<p>
+📞 Customer Care:
+<b>+91 9876543210</b>
+</p>
+
+<p>
+📧 Email:
+<b>support@smartwater.com</b>
+</p>
+
+<p>
+🙏 Thank you for using Smart Village Water Management System.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 Smart Water Sharing Network</p>
+</footer>
+
+<script>
+
+const RATE = 2;
+const TRANSPORT = 150;
+
+let totalRevenue =
+parseInt(localStorage.getItem("revenue")) || 0;
+
+let totalTransfers =
+parseInt(localStorage.getItem("transfers")) || 0;
+
+let villagesWithWater =
+JSON.parse(localStorage.getItem("has")) || [
+
+{
+name:"Green Village",
+volume:5000,
+ownerPhone:"9876543210"
+},
+
+{
+name:"River Town",
+volume:3000,
+ownerPhone:"9123456780"
+}
+
+];
+
+let villagesNeedWater =
+JSON.parse(localStorage.getItem("need")) || [
+
+{
+name:"Dry Hills",
+volume:2000
+},
+
+{
+name:"Sun Village",
+volume:1500
+}
+
+];
+
+let history =
+JSON.parse(localStorage.getItem("history")) || [];
+
+if(localStorage.getItem("theme")==="dark"){
+document.body.classList.add("dark");
+}
+
+function saveData(){
+
+localStorage.setItem("has",
+JSON.stringify(villagesWithWater));
+
+localStorage.setItem("need",
+JSON.stringify(villagesNeedWater));
+
+localStorage.setItem("history",
+JSON.stringify(history));
+
+localStorage.setItem("revenue",
+totalRevenue);
+
+localStorage.setItem("transfers",
+totalTransfers);
+
+}
+
+function refreshUI(){
+
+const hasList =
+document.getElementById("hasList");
+
+const needList =
+document.getElementById("needList");
+
+const source =
+document.getElementById("source");
+
+const destination =
+document.getElementById("destination");
+
+hasList.innerHTML="";
+needList.innerHTML="";
+source.innerHTML="";
+destination.innerHTML="";
+
+let totalWater=0;
+let totalNeed=0;
+
+const searchHas =
+document.getElementById("searchHas")
+.value.toLowerCase();
+
+const searchNeed =
+document.getElementById("searchNeed")
+.value.toLowerCase();
+
+villagesWithWater.forEach(v=>{
+
+if(!v.name.toLowerCase()
+.includes(searchHas)) return;
+
+totalWater += v.volume;
+
+let color =
+v.volume<1000 ? "red" :
+v.volume<3000 ? "orange" :
+"green";
+
+hasList.innerHTML += `
+<li>
+
+<div>
+
+<b>${v.name}</b>
+- ${v.volume} L
+<br>
+📞 Owner:
+${v.ownerPhone}
+
+<div class="progress">
+
+<div class="fill"
+style="
+width:${Math.min(v.volume/50,100)}%;
+background:${color};
+"></div>
+
+</div>
+
+</div>
+
+<button class="delete-btn"
+onclick="deleteVillage('${v.name}','has')">
+Delete
+</button>
+
+</li>
+`;
+
+source.innerHTML += `
+<option value="${v.name}">
+${v.name} - Owner: ${v.ownerPhone}
+</option>
+`;
+
+});
+
+villagesNeedWater.forEach(v=>{
+
+if(!v.name.toLowerCase()
+.includes(searchNeed)) return;
+
+totalNeed += v.volume;
+
+needList.innerHTML += `
+<li>
+
+<div>
+
+<b>${v.name}</b>
+- Need ${v.volume} L
+
+<div class="progress">
+
+<div class="fill"
+style="
+width:${Math.min(v.volume/50,100)}%;
+"></div>
+
+</div>
+
+</div>
+
+<button class="delete-btn"
+onclick="deleteVillage('${v.name}','need')">
+Delete
+</button>
+
+</li>
+`;
+
+destination.innerHTML += `
+<option>${v.name}</option>
+`;
+
+});
+
+document.getElementById("totalWater")
+.innerText = totalWater + " L";
+
+document.getElementById("totalNeed")
+.innerText = totalNeed + " L";
+
+document.getElementById("totalRevenue")
+.innerText = "₹" + totalRevenue;
+
+document.getElementById("totalTransfers")
+.innerText = totalTransfers;
+
+loadHistory();
+
+saveData();
+
+drawChart();
+
+}
+
+function addVillage(type){
+
+const name =
+type==="has"
+?document.getElementById("hasName").value
+:document.getElementById("needName").value;
+
+const volume =
+parseInt(
+type==="has"
+?document.getElementById("hasVol").value
+:document.getElementById("needVol").value
+);
+
+if(!name || volume<=0){
+alert("Enter valid details");
+return;
+}
+
+if(type==="has"){
+
+const ownerPhone =
+prompt("Enter Owner Phone Number");
+
+villagesWithWater.push({
+name,
+volume,
+ownerPhone
+});
+
+}else{
+
+villagesNeedWater.push({
+name,
+volume
+});
+
+}
+
+refreshUI();
+
+}
+
+function deleteVillage(name,type){
+
+if(type==="has"){
+
+villagesWithWater =
+villagesWithWater.filter(v=>v.name!==name);
+
+}else{
+
+villagesNeedWater =
+villagesNeedWater.filter(v=>v.name!==name);
+
+}
+
+refreshUI();
+
+}
+
+function calculateBill(){
+
+const amount =
+parseInt(document.getElementById("amount").value)||0;
+
+const waterCost = amount * RATE;
+const total = waterCost + TRANSPORT;
+
+document.getElementById("waterCost")
+.innerText = "₹"+waterCost;
+
+document.getElementById("totalBill")
+.innerText = "₹"+total;
+
+}
+
+document.getElementById("transferForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const source =
+document.getElementById("source").value;
+
+const destination =
+document.getElementById("destination").value;
+
+const amount =
+parseInt(document.getElementById("amount").value);
+
+const customerName =
+document.getElementById("customerName").value;
+
+const customerPhone =
+document.getElementById("customerPhone").value;
+
+const paymentMethod =
+document.getElementById("paymentMethod").value;
+
+if(source===destination){
+alert("Source and destination cannot be same");
+return;
+}
+
+const seller =
+villagesWithWater.find(v=>
+source.includes(v.name)
+);
+
+const buyer =
+villagesNeedWater.find(v=>
+v.name===destination
+);
+
+if(seller.volume < amount){
+alert("Not enough water");
+return;
+}
+
+seller.volume -= amount;
+
+buyer.volume =
+Math.max(0,buyer.volume-amount);
+
+const revenue = amount * RATE;
+
+totalRevenue += revenue;
+totalTransfers++;
+
+const now = new Date();
+
+history.push({
+
+from:seller.name,
+to:destination,
+amount,
+revenue,
+customerName,
+customerPhone,
+paymentMethod,
+date:now.toLocaleString()
+
+});
+
+refreshUI();
+
+this.reset();
+
+calculateBill();
+
+});
+
+function loadHistory(){
+
+const body =
+document.getElementById("historyBody");
+
+body.innerHTML="";
+
+if(history.length===0){
+
+body.innerHTML=`
+<tr>
+<td colspan="8">
+No transfers yet
+</td>
+</tr>
+`;
+
+return;
+
+}
+
+history.forEach(h=>{
+
+body.innerHTML += `
+<tr>
+
+<td>${h.from}</td>
+<td>${h.to}</td>
+<td>${h.amount} L</td>
+<td>₹${h.revenue}</td>
+<td>${h.customerName}</td>
+<td>${h.customerPhone}</td>
+<td>${h.paymentMethod}</td>
+<td>${h.date}</td>
+
+</tr>
+`;
+
+});
+
+}
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark");
+
+if(document.body.classList.contains("dark")){
+localStorage.setItem("theme","dark");
+}else{
+localStorage.setItem("theme","light");
+}
+
+}
+
+function drawChart(){
+
+const ctx =
+document.getElementById("waterChart");
+
+if(window.chartInstance){
+window.chartInstance.destroy();
+}
+
+window.chartInstance =
+new Chart(ctx,{
+
+type:"bar",
+
+data:{
+
+labels:
+villagesWithWater.map(v=>v.name),
+
+datasets:[{
+
+label:"Water Available",
+
+data:
+villagesWithWater.map(v=>v.volume)
+
+}]
+
+}
+
+});
+
+}
+
+function downloadCSV(){
+
+let csv =
+"From,To,Liters,Revenue,Customer,Phone,Payment,Date\n";
+
+history.forEach(h=>{
+
+csv +=
+`${h.from},${h.to},${h.amount},${h.revenue},${h.customerName},${h.customerPhone},${h.paymentMethod},${h.date}\n`;
+
+});
+
+const blob =
+new Blob([csv],{type:"text/csv"});
+
+const a =
+document.createElement("a");
+
+a.href = URL.createObjectURL(blob);
+
+a.download = "water_history.csv";
+
+a.click();
+
+}
+
+function enterWebsite(){
+
+document.getElementById("welcomePage")
+.style.display = "none";
+
+}
+
+refreshUI();
+
+</script>
+
+</body>
+</html>
