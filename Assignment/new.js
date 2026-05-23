@@ -49,5 +49,5 @@ function submitTransfer() {
   }
 
   msg.style.color = "green";
-  msg.innerText = `dispatched ${liters} from ${sourceVillage} to ${destinationVillage}`;
+  msg.innerText = `dispatched ${liters}L from ${sourceVillage} to ${destinationVillage}`;
 }
