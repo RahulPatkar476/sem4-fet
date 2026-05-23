@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Water Transfer</title>
+  <link rel="stylesheet" href="new.css">
+</head>
+<body>
+
+  <h2>Village Water Transfer</h2>
+
+  <div class="box">
+    <h3>Add Village with Water</h3>
+    <input type="text" id="newVillageName" placeholder="Village Name">
+    <button onclick="addVillage()">Add Village</button>
+  </div>
+
+  <div class="box">
+    <h3>Transfer Request</h3>
+    <label>From:</label>
+    <select id="sourceDropdown">
+      <option value="">Select Village...</option>
+    </select>
+
+    <br><br>
+
+    <label>Liters to Transfer (₹2 per Liter):</label>
+    <input type="number" id="litersInput" oninput="updatePrice()">
+    
+    <p>Total Cost: <strong>₹<span id="totalCost">0</span></strong></p>
+
+    <button onclick="submitTransfer()">Confirm Transfer</button>
+  </div>
+
+  <p id="statusMessage"></p>
+
+  <script src="new.js"></script>
+</body>
+</html>
