@@ -1,5 +1,5 @@
 let villages = ["Green Village", "River Town"];
-updateDropdown();
+updateDropdowns();
 
 function addVillage() {
   let nameInput = document.getElementById("newVillageName");
@@ -7,16 +7,20 @@ function addVillage() {
   if (nameInput.value.trim() !== "") {
     villages.push(nameInput.value); 
     nameInput.value = "";           
-    updateDropdown();               
+    updateDropdowns();               
   }
 }
 
-function updateDropdown() {
-  let dropdown = document.getElementById("sourceDropdown");
-  dropdown.innerHTML = '<option value="">Select Village...</option>';
+function updateDropdowns() {
+  let sourceDropdown = document.getElementById("sourceDropdown");
+  let destinationDropdown = document.getElementById("destinationDropdown");
+  
+  sourceDropdown.innerHTML = '<option value="">Select Village...</option>';
+  destinationDropdown.innerHTML = '<option value="">Select Village...</option>';
   
   villages.forEach(function(village) {
-    dropdown.innerHTML += `<option value="${village}">${village}</option>`;
+    sourceDropdown.innerHTML += `<option value="${village}">${village}</option>`;
+    destinationDropdown.innerHTML += `<option value="${village}">${village}</option>`;
   });
 }
 
@@ -27,16 +31,23 @@ function updatePrice() {
 }
 
 function submitTransfer() {
-  let selectedVillage = document.getElementById("sourceDropdown").value;
+  let sourceVillage = document.getElementById("sourceDropdown").value;
+  let destinationVillage = document.getElementById("destinationDropdown").value;
   let liters = document.getElementById("litersInput").value;
   let msg = document.getElementById("statusMessage");
 
-  if (!selectedVillage || liters <= 0) {
+  if (!sourceVillage || !destinationVillage || liters <= 0) {
     msg.style.color = "red";
-    msg.innerText = "Please select a village and enter valid liters.";
+    msg.innerText = "Please select both villages and enter valid liters.";
+    return;
+  }
+
+  if (sourceVillage === destinationVillage) {
+    msg.style.color = "red";
+    msg.innerText = "Source and destination village cannot be the same.";
     return;
   }
 
   msg.style.color = "green";
-  msg.innerText = `Success! Dispatched ${liters}L from ${selectedVillage}.`;
+  msg.innerText = `Dispatched ${liters}L from ${sourceVillage} to ${destinationVillage}.`;
 }
